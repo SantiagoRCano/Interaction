@@ -4,6 +4,7 @@ import Hola from "@/app/hola";
 import React from "react";
 import useHttp from "@/hooks/useHttp"
 import { Tranquiluxe } from "uvcanvas"
+import BotonLleva from '@/app/RedirectButton'
 
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
   const [id, setId] = React.useState("Mercado")
 
   const reverseData = (arg) => setId(arg)
+
   const { data, loading, error} = useHttp(`https://www.cpocketbot.com/api/interaccion/${id}`)
 
 
@@ -30,6 +32,7 @@ export default function Home() {
           {error && !data && !loading && <h2 className="text-white"> Error al </h2>}
           {loading && !error && !data && <h2 className="text-white"> Cargando... </h2>}
         </div>
+        <BotonLleva destination={`./services/${id}`} buttonText="Ir al otro lado"/>
     </main>
 
     
