@@ -5,11 +5,20 @@ import React from "react";
 import useHttp from "@/hooks/useHttp"
 import { Tranquiluxe } from "uvcanvas"
 import BotonLleva from '@/app/RedirectButton'
+import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
 
 export default function Home() {
 
-  const [id, setId] = React.useState("Mercado")
+    const other = [
+      {name: "Santiago", age:19, weight: 51},
+      {name: "Alejo", age:26, weight: 70},
+      {name: "Alexander", age:29, weight: 67},
+      {name: "Simon", age:21, weight: 110}
+    ]
+
+
+  const [id, setId] = React.useState("")
 
   const reverseData = (arg) => setId(arg)
 
@@ -20,19 +29,18 @@ export default function Home() {
   return (
     <main className="flex min-h-[7rem] flex-col items-center justify-between p-24">
         <div className="bg-rose-800 flex flex-wrap justify-center items-center gap-14 p-5 rounded-lg mb-32 h-full">
-          <button onClick={() => reverseData("Mercado")} className="bg-white md:h-[11-vh] md:w-[9vw] p-5 rounded-lg text-black" id="Mercado" value="Mercado">Mercados</button>
-          <button onClick={() => reverseData("Multas")} className="bg-white md:h-[11-vh] md:w-[9vw] p-5 rounded-lg text-black" id="Multa" value="Multas">Multas</button>
-          <button onClick={() => reverseData("Inmobiliaria")} className="bg-white md:h-[11-vh] md:w-[9vw] p-5 rounded-lg text-black" id="inmobiliaria" value="Inmobiliaria">Inmobiliaria</button>
-          <button onClick={() => reverseData("Recordatorios")} className="bg-white md:h-[11-vh] md:w-[9vw] p-5 rounded-lg text-black" id="recordatorio" value="Recordatorios">Recordatorios</button>
-          <button onClick={() => reverseData("Imagen")} className="bg-white md:h-[11-vh] md:w-[9vw] p-5 rounded-lg text-black" id="generador" value="Imagen">Generador de Imagen</button>
-          <button onClick={() => reverseData("Total")} className="bg-white md:h-[11-vh] md:w-[9vw] p-5 rounded-lg text-black" id="total" value="Total">Total</button>
+          <BotonLleva destination={`./services`} buttonText="Mercado"/>
+          <BotonLleva destination={`./services`} buttonText="Multas"/>
+          <BotonLleva destination={`./services`} buttonText="Inmobiliaria"/>
+          <BotonLleva destination={`./services`} buttonText="Recordatorios"/>
+          <BotonLleva destination={`./services`} buttonText="Imagen"/>
+          <BotonLleva destination={`./services`} buttonText="Total"/>
         </div>
-        <div className="bg-rose-900 min-w-[8rem] min-h-[4rem] p-5 rounded-lg mt-10">
+        {/* <div className="bg-rose-900 min-w-[8rem] min-h-[4rem] p-5 rounded-lg mt-10">
           {data && !loading && !error && <h2 className="text-white"> {id} : {data.Total} </h2> }
           {error && !data && !loading && <h2 className="text-white"> Error al </h2>}
           {loading && !error && !data && <h2 className="text-white"> Cargando... </h2>}
-        </div>
-        <BotonLleva destination={`./services/${id}`} buttonText="Ir al otro lado"/>
+        </div> */}
     </main>
 
     
