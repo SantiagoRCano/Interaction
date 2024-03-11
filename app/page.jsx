@@ -5,7 +5,7 @@ import React from "react";
 import useHttp from "@/hooks/useHttp"
 import { Tranquiluxe } from "uvcanvas"
 import BotonLleva from '@/app/RedirectButton'
-import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
+
 
 
 export default function Home() {
