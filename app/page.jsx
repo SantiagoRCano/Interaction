@@ -27,8 +27,8 @@ export default function Home() {
 
 
   return (
-    <main className="flex min-h-[7rem] flex-col items-center justify-between p-24">
-        <div className="bg-rose-800 flex flex-wrap justify-center items-center gap-14 p-5 rounded-lg mb-32 h-full">
+    <main className="flex min-h-[7rem] flex-col items-center justify-center align-middle p-24">
+        <div className="bg-vermilon flex flex-wrap justify-center items-center text-center gap-14 p-5 rounded-lg mb-32 h-full">
           <BotonLleva destination={`./services`} buttonText="Mercado"/>
           <BotonLleva destination={`./services`} buttonText="Multas"/>
           <BotonLleva destination={`./services`} buttonText="Inmobiliaria"/>
@@ -36,11 +36,6 @@ export default function Home() {
           <BotonLleva destination={`./services`} buttonText="Imagen"/>
           <BotonLleva destination={`./services`} buttonText="Total"/>
         </div>
-        {/* <div className="bg-rose-900 min-w-[8rem] min-h-[4rem] p-5 rounded-lg mt-10">
-          {data && !loading && !error && <h2 className="text-white"> {id} : {data.Total} </h2> }
-          {error && !data && !loading && <h2 className="text-white"> Error al </h2>}
-          {loading && !error && !data && <h2 className="text-white"> Cargando... </h2>}
-        </div> */}
     </main>
 
     
