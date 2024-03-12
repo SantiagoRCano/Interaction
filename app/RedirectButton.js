@@ -10,7 +10,7 @@ const BotonLleva = ({ destination, buttonText }) => {
 
   return (
     <Link href={`${destination}/${buttonText}`}>
-        <button className='bg-white md:h-[11-vh] md:w-[9vw] p-5 rounded-lg text-black' onClick={() => updateInfo(buttonText)}>{buttonText}</button>
+        <button className='bg-bluesky md:h-[11-vh] md:w-[9vw] p-5 rounded-lg text-white' onClick={() => updateInfo(buttonText)}>{buttonText}</button>
     </Link>
   );
 };

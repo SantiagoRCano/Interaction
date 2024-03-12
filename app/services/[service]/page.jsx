@@ -11,11 +11,11 @@ export const page = () => {
 
 
 
-    const { data, loading, error} = useHTTP(`https://www.cpocketbot.com/api/interaccion/${params.service}`)
+    const { data, loading, error} = useHTTP(`http://localhost:80/api/interaccion/${params.service}`)
     
 
     const [otherData, setOtherData] = React.useState([]);
-    let [screenWidth, setWindowWidth] = useState(0);
+    let [screenWidth, setWindowWidth] = useState(window.innerWidth);
 
     const handleScreenWidth = () => {
         setWindowWidth(window.innerWidth)
@@ -31,8 +31,8 @@ export const page = () => {
 
 
     let formatData = {
-        November:"Noviembre 2023",
-        December:"Diciembre 2023",
+        November:"Noviembre",
+        December:"Diciembre",
         January:"Enero",
         February:"Febrero",
         March:"Marzo",
@@ -60,31 +60,35 @@ export const page = () => {
 
 
     let totalService = otherData.reduce((a,b) => a + b.Total, 0)
-    let tamañoGrafp = ""
+    let tamañoGrafp;
+    let tamañoLetra;
+    let tamañoBarra;
+    let angulo;
 
     if(screenWidth >= 768){
-        tamañoGrafp = "100%"
-    }else{
         tamañoGrafp = "80%"
+        tamañoLetra = 16
+        tamañoBarra = 60
+        angulo = 360
     }
 
 
   return (
         <div className="bg-#3FA7D6 min-w-[8rem] min-h-[4rem] p-5 rounded-lg mx-auto">
-            {data && !loading && !error && <h2 className="text-darkrai text-center sm:mb-10 sm:text-2xl"> {params.service} : {totalService} </h2> }
-            {error && !data && !loading && <h2 className="text-darkrai"> Error al </h2>}
-            {loading && !error && !data && <h2 className="text-darkrai"> Cargando... </h2>}
+            {data && !loading && !error && <h2 className="text-white text-center sm:mb-10 sm:text-2xl"> {params.service} : {totalService} </h2> }
+            {error && !data && !loading && <h2 className="text-white"> Error al </h2>}
+            {loading && !error && !data && <h2 className="text-white"> Cargando... </h2>}
             
             
             <div className='flex flex-col items-center text-center justify-center md:flex-row md:text-start'>
-                <ResponsiveContainer className="mt-6" width={tamañoGrafp} aspect={3}>
+                <ResponsiveContainer className="mt-6" width={tamañoGrafp || '125%'} aspect={3}>
                     <BarChart data={otherData} width={100} height={100} margin={{top:5,right:30,left:20,bottom:5}}>
-                    <CartesianGrid strokeDasharray="2 2 2"/>
-                    <XAxis dataKey="Month"/>
-                    <YAxis/>
+                    <CartesianGrid strokeDasharray="3 3" fill='#ffffff'/>
+                    <XAxis dataKey="Month" tick={{ fill: 'white', fontSize: tamañoLetra || 10}} angle={angulo || -45} />
+                    <YAxis tick={{ fill: 'white'}}/>
                     <Tooltip/>
                     <Legend/>
-                    <Bar dataKey="Total" fill="#009D71"/>
+                    <Bar dataKey="Total" fill="#1f6fea" barSize={tamañoBarra || 15}/>
                     </BarChart>
                 </ResponsiveContainer>
                 
@@ -92,7 +96,7 @@ export const page = () => {
                     <ul>
                         {otherData.map((inter) => (
                             <li>
-                                <p className='text-darkrai'>{inter.Month || 'Total'}: {inter.Total}</p>
+                                <p className='text-white text-1xl'>{inter.Month || 'Total'}: {inter.Total}</p>
                             </li>
                         ))}
                     </ul>

@@ -16,7 +16,9 @@ const config: Config = {
       colors:{
         vermilon: '#731963',
         lavender: '#EEE5E9',
-        darkrai: '#1C2321'
+        darkrai: '#1C2321',
+        zander: '#21262c',
+        bluesky:'#1f6fea',
       }
     },
   },
