@@ -11,7 +11,7 @@ export const page = () => {
 
 
 
-    const { data, loading, error} = useHTTP(`http://localhost:80/api/interaccion/${params.service}`)
+    const { data, loading, error} = useHTTP(`https://www.cpocketbot.com/api/interaccion/${params.service}`)
     
 
     const [otherData, setOtherData] = React.useState([]);
@@ -81,14 +81,13 @@ export const page = () => {
             
             
             <div className='flex flex-col items-center text-center justify-center md:flex-row md:text-start'>
-                <ResponsiveContainer className="mt-6" width={tamañoGrafp || '125%'} aspect={3}>
+                <ResponsiveContainer className="mt-6" width={tamañoGrafp || '120%'} aspect={3}>
                     <BarChart data={otherData} width={100} height={100} margin={{top:5,right:30,left:20,bottom:5}}>
-                    <CartesianGrid strokeDasharray="3 3" fill='#ffffff'/>
-                    <XAxis dataKey="Month" tick={{ fill: 'white', fontSize: tamañoLetra || 10}} angle={angulo || -45} />
-                    <YAxis tick={{ fill: 'white'}}/>
-                    <Tooltip/>
-                    <Legend/>
-                    <Bar dataKey="Total" fill="#1f6fea" barSize={tamañoBarra || 15}/>
+                        <CartesianGrid strokeDasharray="3 3" fill='#ffffff'/>
+                        <XAxis dataKey="Month" tick={{ fill: 'white', fontSize: tamañoLetra || 10}} angle={angulo || 45}/>
+                        <YAxis tick={{ fill: 'white'}}/>
+                        <Tooltip/>
+                        <Bar dataKey="Total" fill="#1f6fea" barSize={tamañoBarra || 15}/>
                     </BarChart>
                 </ResponsiveContainer>
                 
