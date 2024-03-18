@@ -2,19 +2,17 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import useHTTP from '@/hooks/useHttp'
-import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
 
-
-export const page = () => {
+export const Page = () => {
     const params = useParams()
 
 
 
     const { data, loading, error} = useHTTP(`https://www.cpocketbot.com/api/interaccion/${params.service}`)
     
-
-    const [otherData, setOtherData] = React.useState([]);
+    let [otherData, setOtherData] = React.useState([]);
     let [screenWidth, setWindowWidth] = useState(window.innerWidth);
 
     const handleScreenWidth = () => {
@@ -93,8 +91,8 @@ export const page = () => {
                 
                 <div className='mt-6 md:mt-0'>
                     <ul>
-                        {otherData.map((inter) => (
-                            <li>
+                        {otherData.map((inter,index) => (
+                            <li key={index}>
                                 <p className='text-white text-1xl'>{inter.Month || 'Total'}: {inter.Total}</p>
                             </li>
                         ))}
@@ -111,4 +109,4 @@ export const page = () => {
   
 }
 
-export default page;
+export default Page;
