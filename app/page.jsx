@@ -18,6 +18,8 @@ export default function Home() {
           <BotonLleva destination={`./services`} buttonText="Inmobiliaria"/>
           <BotonLleva destination={`./services`} buttonText="Recordatorios"/>
           <BotonLleva destination={`./services`} buttonText="Imagen"/>
+          <BotonLleva destination={`./services`} buttonText="Responde"/>
+          <BotonLleva destination={`./services`} buttonText="Resumen"/>
           <BotonLleva destination={`./services`} buttonText="Total"/>
         </div>
     </main>
