@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import useHTTP from '@/hooks/useHttp'
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis,RadialBarChart,RadialBar,Legend,LineChart
+,Line } from "recharts"
 
 
 export const Page = () => {
@@ -25,21 +26,23 @@ export const Page = () => {
             window.removeEventListener('resize', handleScreenWidth)
         }
     }, [])
-    
-
 
     let formatData = {
-        November:"Noviembre",
-        December:"Diciembre",
-        January:"Enero",
-        February:"Febrero",
-        March:"Marzo",
-        April:"Abril",
-        May:"Mayo",
-        June:"Junio",
-        July:"Julio",
-        August:"Agosto"
+        '2023-May':'Mayo 2023',
+        '2023-June':'Junio 2023',
+        '2023-July':'Julio 2023',
+        '2023-August':'Agosto 2023',
+        '2023-September':'Septiembre 2023',
+        '2023-October':'Octubre 2023',
+        '2023-November':'Noviembre 2023',
+        '2023-December':'Diciembre 2023',
+        '2024-January':'Enero',
+        '2024-February':'Febrero',
+        '2024-March':'Marzo',
+        '2024-April':'Abril'
     }
+            
+
 
     let nuevo = []
 
@@ -64,7 +67,7 @@ export const Page = () => {
     let angulo;
 
     if(screenWidth >= 768){
-        tamañoGrafp = "80%"
+        tamañoGrafp = "70%"
         tamañoLetra = 16
         tamañoBarra = 60
         angulo = 360
@@ -80,13 +83,17 @@ export const Page = () => {
             
             <div className='flex flex-col items-center text-center justify-center md:flex-row md:text-start'>
                 <ResponsiveContainer className="mt-6" width={tamañoGrafp || '120%'} aspect={3}>
-                    <BarChart data={otherData} width={100} height={100} margin={{top:5,right:30,left:20,bottom:5}}>
-                        <CartesianGrid strokeDasharray="3 3" fill='#ffffff'/>
-                        <XAxis dataKey="Month" tick={{ fill: 'white', fontSize: tamañoLetra || 10}} angle={angulo || 45}/>
-                        <YAxis tick={{ fill: 'white'}}/>
-                        <Tooltip/>
-                        <Bar dataKey="Total" fill="#1f6fea" barSize={tamañoBarra || 15}/>
-                    </BarChart>
+                <LineChart width={730} height={250} data={otherData}
+                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="Month" className='text-white'  tick={{fontSize: 10}} angle={-45} tickMargin={10}/>
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="Total" stroke="#8884d8" />
+
+                </LineChart>
+
                 </ResponsiveContainer>
                 
                 <div className='mt-6 md:mt-0'>
