@@ -1,6 +1,5 @@
 "use client"
 import Image from "next/image";
-import Hola from "@/app/hola";
 import React from "react";
 import useHttp from "@/hooks/useHttp"
 import { Tranquiluxe } from "uvcanvas"
@@ -21,6 +20,7 @@ export default function Home() {
           <BotonLleva destination={`./services`} buttonText="Responde"/>
           <BotonLleva destination={`./services`} buttonText="Resumen"/>
           <BotonLleva destination={`./services`} buttonText="Total"/>
+          <BotonLleva destination={`./services`} buttonText="Noticias"/>
         </div>
     </main>
 
