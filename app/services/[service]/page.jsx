@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import useHTTP from '@/hooks/useHttp'
+import serviceHttp from '@/hooks/servicesHttps'
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis,RadialBarChart,RadialBar,Legend,LineChart
 ,Line } from "recharts"
 
@@ -12,8 +13,11 @@ export const Page = () => {
 
 
     const { data, loading, error} = useHTTP(`https://www.cpocketbot.com/api/interaccion/${params.service}`)
+    const { dataNews, loadingNews, errorNews} = serviceHttp(`https://www.cpocketbot.com/api/interaccionNews`)
     
     let [otherData, setOtherData] = React.useState([]);
+    let [newValor, setValorNews] = React.useState([])
+
     let [screenWidth, setWindowWidth] = useState(window.innerWidth);
 
     const handleScreenWidth = () => {
@@ -40,13 +44,24 @@ export const Page = () => {
         '2024-February':'Febrero',
         '2024-March':'Marzo',
         '2024-April':'Abril'
+    };
+
+    let newsDate = {
+        '2023-11':'2023 Noviembre',
+        '2024-2':'2024 Febrero',
+        '2024-3':'2024 Marzo',
+        '2024-4':'2024 Abril'
     }
             
+    console.log(dataNews)
 
 
     let nuevo = []
-
-
+    let tempNoticias = []
+    
+    
+    
+    
     React.useEffect(() => {
         if(data && !loading && !error){
             for(let i = 0; i < data.length; i++){
@@ -55,9 +70,29 @@ export const Page = () => {
                 nuevo.push({Month:mes, Total: valor})
             }
         }
-
+        
         setOtherData(nuevo)
     },[data,loading,error])
+    
+    React.useEffect(() => {
+        if(dataNews && !loadingNews && !errorNews){
+            
+
+            for(let i = 0; i < dataNews.length; i++){
+                let mes = newsDate[dataNews[i].Mes]
+                let semana = dataNews[i].Semana
+                let valor = dataNews[i].Total
+
+
+                tempNoticias.push({Month: mes, Week: semana, Count: valor})
+            }
+    
+            setValorNews(tempNoticias)
+        }
+
+    },[dataNews, loadingNews, errorNews])
+
+
 
 
     let totalService = otherData.reduce((a,b) => a + b.Total, 0)
@@ -105,6 +140,16 @@ export const Page = () => {
                         ))}
                     </ul>
                 </div>
+            </div>
+
+            <div>
+                <ul>
+                    {newValor.map((element,index) => (
+                        <li key={index}>
+                            <p className='text-white text-1xl'>{element.Month} Semana {element.Week}: {element.Count}</p>
+                        </li>
+                    ))}
+                </ul>
             </div>
         </div>
 
