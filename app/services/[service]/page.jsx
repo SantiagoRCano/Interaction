@@ -13,7 +13,7 @@ export const Page = () => {
 
 
     const { data, loading, error} = useHTTP(`https://www.cpocketbot.com/api/interaccion/${params.service}`)
-    const { dataNews, loadingNews, errorNews} = serviceHttp(`https://www.cpocketbot.com/api/interaccionNews`)
+    const { dataNews, loadingNews, errorNews} = serviceHttp(`https://www.cpocketbot.com/api/interaccionWeek/${params.service}`)
     
     let [otherData, setOtherData] = React.useState([]);
     let [newValor, setValorNews] = React.useState([])
@@ -47,10 +47,18 @@ export const Page = () => {
     };
 
     let newsDate = {
-        '2023-11':'2023 Noviembre',
-        '2024-2':'2024 Febrero',
-        '2024-3':'2024 Marzo',
-        '2024-4':'2024 Abril'
+        '2023-5':'Mayo 2023',
+        '2023-6':'Junio 2023',
+        '2023-7':'Julio 2023',
+        '2023-8':'Agosto 2023',
+        '2023-9':'Septiembre 2023',
+        '2023-10':'Octubre 2023',
+        '2023-11':'Noviembre 2023',
+        '2023-12':'Diciembre 2023',
+        '2024-1':'Enero 2024',
+        '2024-2':'Febrero 2024',
+        '2024-3':'Marzo 2024',
+        '2024-4':'Abril 2024'
     }
             
     console.log(dataNews)
