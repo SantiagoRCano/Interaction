@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import useHTTP from '@/hooks/useHttp'
+import serviceHttp from '@/hooks/servicesHttps'
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis,RadialBarChart,RadialBar,Legend,LineChart
 ,Line } from "recharts"
 
@@ -12,8 +13,11 @@ export const Page = () => {
 
 
     const { data, loading, error} = useHTTP(`https://www.cpocketbot.com/api/interaccion/${params.service}`)
+    const { dataNews, loadingNews, errorNews} = serviceHttp(`https://www.cpocketbot.com/api/interaccionWeek/${params.service}`)
     
     let [otherData, setOtherData] = React.useState([]);
+    let [newValor, setValorNews] = React.useState([])
+
     let [screenWidth, setWindowWidth] = useState(window.innerWidth);
 
     const handleScreenWidth = () => {
@@ -40,13 +44,32 @@ export const Page = () => {
         '2024-February':'Febrero',
         '2024-March':'Marzo',
         '2024-April':'Abril'
+    };
+
+    let newsDate = {
+        '2023-5':'Mayo 2023',
+        '2023-6':'Junio 2023',
+        '2023-7':'Julio 2023',
+        '2023-8':'Agosto 2023',
+        '2023-9':'Septiembre 2023',
+        '2023-10':'Octubre 2023',
+        '2023-11':'Noviembre 2023',
+        '2023-12':'Diciembre 2023',
+        '2024-1':'Enero 2024',
+        '2024-2':'Febrero 2024',
+        '2024-3':'Marzo 2024',
+        '2024-4':'Abril 2024'
     }
             
+    console.log(dataNews)
 
 
     let nuevo = []
-
-
+    let tempNoticias = []
+    
+    
+    
+    
     React.useEffect(() => {
         if(data && !loading && !error){
             for(let i = 0; i < data.length; i++){
@@ -55,9 +78,29 @@ export const Page = () => {
                 nuevo.push({Month:mes, Total: valor})
             }
         }
-
+        
         setOtherData(nuevo)
     },[data,loading,error])
+    
+    React.useEffect(() => {
+        if(dataNews && !loadingNews && !errorNews){
+            
+
+            for(let i = 0; i < dataNews.length; i++){
+                let mes = newsDate[dataNews[i].Mes]
+                let semana = dataNews[i].Semana
+                let valor = dataNews[i].Total
+
+
+                tempNoticias.push({Month: mes, Week: semana, Count: valor})
+            }
+    
+            setValorNews(tempNoticias)
+        }
+
+    },[dataNews, loadingNews, errorNews])
+
+
 
 
     let totalService = otherData.reduce((a,b) => a + b.Total, 0)
@@ -106,10 +149,52 @@ export const Page = () => {
                     </ul>
                 </div>
             </div>
+
+            <div>
+                <div class="relative overflow-x-auto">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 rounded-s-lg">
+                                    Mes
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    # de Semana
+                                </th>
+                                <th scope="col" class="px-6 py-3 rounded-e-lg">
+                                    Total
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {newValor.map((element,index) => (
+                                <tr class="bg-white dark:bg-gray-800" key={index}>
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {element.Month}
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        {element.Week}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {element.Count}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
-        
-        
+
+
+/* <ul>
+    {newValor.map((element,index) => (
+        <li key={index}>
+            <p className='text-white text-1xl'>{element.Month} Semana {element.Week}: {element.Count}</p>
+        </li>
+    ))}
+</ul> */
         
   )
 

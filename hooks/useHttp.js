@@ -6,8 +6,6 @@ import initMiddleware from '@/hooks/initmidle'
 const useHTTP = (url, token) => {
         
 
-
-
         const [data, setData] = React.useState(null);
         const [error, setError] = React.useState(null);
         const [loading, setLoading] = React.useState(true);
@@ -32,5 +30,7 @@ const useHTTP = (url, token) => {
         }, [url]);
         return { data, loading, error };
 }
+
+
 
 export default useHTTP;
