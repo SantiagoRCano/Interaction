@@ -3,20 +3,20 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import useHTTP from '@/hooks/useHttp'
 import serviceHttp from '@/hooks/servicesHttps'
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis,RadialBarChart,RadialBar,Legend,LineChart
-,Line } from "recharts"
-
+import { CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis,Legend,LineChart,Line } from "recharts"
 
 export const Page = () => {
     const params = useParams()
+    let [otherData, setOtherData] = React.useState([]);
+    let [newValor, setValorNews] = React.useState([])
+    
 
 
 
     const { data, loading, error} = useHTTP(`https://www.cpocketbot.com/api/interaccion/${params.service}`)
     const { dataNews, loadingNews, errorNews} = serviceHttp(`https://www.cpocketbot.com/api/interaccionWeek/${params.service}`)
     
-    let [otherData, setOtherData] = React.useState([]);
-    let [newValor, setValorNews] = React.useState([])
+
 
     let [screenWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -61,7 +61,6 @@ export const Page = () => {
         '2024-4':'Abril 2024'
     }
             
-    console.log(dataNews)
 
 
     let nuevo = []
@@ -100,8 +99,7 @@ export const Page = () => {
 
     },[dataNews, loadingNews, errorNews])
 
-
-
+    
 
     let totalService = otherData.reduce((a,b) => a + b.Total, 0)
     let tamañoGrafp;
@@ -117,6 +115,8 @@ export const Page = () => {
     }
 
 
+
+
   return (
         <div className="bg-#3FA7D6 min-w-[8rem] min-h-[4rem] p-5 rounded-lg mx-auto">
             {data && !loading && !error && <h2 className="text-white text-center sm:mb-10 sm:text-2xl"> {params.service} : {totalService} </h2> }
@@ -126,7 +126,7 @@ export const Page = () => {
             
             <div className='flex flex-col items-center text-center justify-center md:flex-row md:text-start'>
                 <ResponsiveContainer className="mt-6" width={tamañoGrafp || '120%'} aspect={3}>
-                <LineChart width={730} height={250} data={otherData}
+                <LineChart width={730} height={250} data={otherData} 
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="Month" className='text-white'  tick={{fontSize: 10}} angle={-45} tickMargin={10}/>
@@ -184,18 +184,7 @@ export const Page = () => {
                     </table>
                 </div>
             </div>
-        </div>
-
-
-
-/* <ul>
-    {newValor.map((element,index) => (
-        <li key={index}>
-            <p className='text-white text-1xl'>{element.Month} Semana {element.Week}: {element.Count}</p>
-        </li>
-    ))}
-</ul> */
-        
+        </div> 
   )
 
   
