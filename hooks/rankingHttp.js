@@ -2,10 +2,11 @@ import React from "react";
 import axios from "axios";
 
 
-const serviceHttp = (url,token) => {
-    const [dataNews, setData] = React.useState(null);
-    const [errorNews, setError] = React.useState(null);
-    const [loadingNews, setLoading] = React.useState(true);
+
+const rakingHttp = (url, token) => {
+    const [rankingData, setData] = React.useState(null);
+    const [rankingError, setError] = React.useState(null);
+    const [rakingLoading, setLoading] = React.useState(true);
 
 
     React.useEffect(() => {
@@ -27,7 +28,7 @@ const serviceHttp = (url,token) => {
         };
         fetchData();
     }, [url]);
-    return { dataNews, loadingNews, errorNews };
+    return { rankingData, rakingLoading, rankingError };
 }
 
-export default serviceHttp;
+export default rakingHttp;
