@@ -116,8 +116,6 @@ export const Page = () => {
         angulo = 360
     }
 
-    console.log(params.service)
-
     if(params.service === 'Editar%20Imagen'){
         params.service = 'Editar Imagen'
     }
