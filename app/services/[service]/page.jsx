@@ -43,7 +43,8 @@ export const Page = () => {
         '2024-January':'Enero',
         '2024-February':'Febrero',
         '2024-March':'Marzo',
-        '2024-April':'Abril'
+        '2024-April':'Abril',
+        '2024-May':'Mayo'
     };
 
     let newsDate = {
@@ -58,7 +59,8 @@ export const Page = () => {
         '2024-1':'Enero 2024',
         '2024-2':'Febrero 2024',
         '2024-3':'Marzo 2024',
-        '2024-4':'Abril 2024'
+        '2024-4':'Abril 2024',
+        '2024-5':'Mayo 2024'
     }
             
 
@@ -114,7 +116,11 @@ export const Page = () => {
         angulo = 360
     }
 
+    console.log(params.service)
 
+    if(params.service === 'Editar%20Imagen'){
+        params.service = 'Editar Imagen'
+    }
 
 
   return (

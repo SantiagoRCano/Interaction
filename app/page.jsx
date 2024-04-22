@@ -31,6 +31,7 @@ export default function Home() {
           <BotonLleva destination={`./services`} buttonText="Resumen"/>
           <BotonLleva destination={`./services`} buttonText="Noticias"/>
           <BotonLleva destination={`./services`} buttonText="Total"/>
+          <BotonLleva destination={`./services`} buttonText="Editar Imagen"/>
         </div>
 
 
