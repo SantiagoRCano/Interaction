@@ -1,6 +1,6 @@
 "use client"
 import React, {useEffect,useState} from "react";
-import BotonLleva from '@/app/RedirectButton'
+import { BotonLleva,BotonLlevaTwo } from '@/app/RedirectButton'
 import rakingHttp from '@/hooks/rankingHttp'
 
 
@@ -32,6 +32,7 @@ export default function Home() {
           <BotonLleva destination={`./services`} buttonText="Noticias"/>
           <BotonLleva destination={`./services`} buttonText="Total"/>
           <BotonLleva destination={`./services`} buttonText="Editar Imagen"/>
+          <BotonLlevaTwo destination={`./recurrence`} buttonText="Recurrencia"/>
         </div>
 
 

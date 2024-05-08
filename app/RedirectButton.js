@@ -15,4 +15,18 @@ const BotonLleva = ({ destination, buttonText }) => {
   );
 };
 
-export default BotonLleva;
+
+const BotonLlevaTwo = ({ destination,buttonText }) => {
+  return(
+    <Link href={destination}>
+      <button className='bg-bluesky md:h-[11-vh] md:w-[9vw] p-5 rounded-lg text-white text-center hover:bg-blue-700'>{buttonText}</button>
+    </Link>
+  )
+}
+
+
+
+export {
+  BotonLleva,
+  BotonLlevaTwo
+};
