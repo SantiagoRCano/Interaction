@@ -29,7 +29,7 @@ export default function Home() {
         {loading && <p>Cargando...</p>}
         {error && <p>Ocurrió un error al cargar la data.</p>}
         {data && (
-          <h2 className="text-white mb-6">Cantidad de personas que le han copiado al bot desde que se creo: {data.Total}</h2>
+          <h2 className="text-black mb-6 p-3 bg-green-500 rounded-lg">Cantidad de personas que le han copiado al bot desde que se creo: {data.Total}</h2>
         )}
         <div className="bg-zander flex flex-wrap justify-center items-center text-center gap-14 p-5 rounded-lg mb-32 h-full">
           <BotonLleva destination={`./services`} buttonText="Mercado"/>
@@ -49,7 +49,7 @@ export default function Home() {
 
         <div className="flex justify-between">
           <div className="text-center border-green-500 border-2 p-5 rounded-lg">
-            <h1 className="mb-5">Ranking de servicios más usados</h1>
+            <h1 className="mb-5 text-white">Ranking de servicios más usados</h1>
             {loading && <p>Cargando...</p>}
             {rakingData.map((inter,index)=> (
               <h3 key={index} className="text-white m-1">{inter.Categoria}: {inter.Total}</h3>
