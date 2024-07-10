@@ -45,7 +45,8 @@ export const Page = () => {
         '2024-March':'Marzo',
         '2024-April':'Abril',
         '2024-May':'Mayo',
-        '2024-June':'Junio'
+        '2024-June':'Junio',
+        '2024-July':'Julio'
     };
 
     let newsDate = {
@@ -62,7 +63,8 @@ export const Page = () => {
         '2024-3':'Marzo 2024',
         '2024-4':'Abril 2024',
         '2024-5':'Mayo 2024',
-        '2024-6':'Junio 2024'
+        '2024-6':'Junio 2024',
+        '2024-7':'Julio 2024'
     }
             
 
