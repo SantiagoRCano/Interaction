@@ -151,7 +151,7 @@ export const Page = () => {
                     <ul>
                         {otherData.map((inter,index) => (
                             <li key={index}>
-                                <p className='text-white text-1xl'>{inter.Month || 'Total'}: {index === 14 ? inter.Total + 842 : inter.Total}</p>
+                                <p className='text-white text-1xl'>{inter.Month || 'Total'}: {inter.Total}</p>
                             </li>
                         ))}
                     </ul>
