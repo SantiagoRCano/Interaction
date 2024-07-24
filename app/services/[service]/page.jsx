@@ -127,7 +127,7 @@ export const Page = () => {
 
   return (
         <div className="bg-#3FA7D6 min-w-[8rem] min-h-[4rem] p-5 rounded-lg mx-auto">
-            {data && !loading && !error && <h2 className="text-white text-center sm:mb-10 sm:text-2xl"> {params.service} : {totalService} </h2> }
+            {data && !loading && !error && <h2 className="text-white text-center sm:mb-10 sm:text-2xl"> {params.service} : {totalService + 842} </h2> }
             {error && !data && !loading && <h2 className="text-white"> Error al </h2>}
             {loading && !error && !data && <h2 className="text-white"> Cargando... </h2>}
             
