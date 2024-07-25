@@ -79,7 +79,7 @@ export const Page = () => {
         if(data && !loading && !error){
             for(let i = 0; i < data.length; i++){
                 let mes = formatData[data[i].Mes]
-                let valor = data[i].Total
+                let valor = parseFloat(data[i].Total);
                 nuevo.push({Month:mes, Total: valor})
             }
         }
@@ -107,7 +107,7 @@ export const Page = () => {
 
     
 
-    let totalService = otherData.reduce((a,b) => a + b.Total, 0)
+    let totalService = otherData.reduce((a, b) => a + (b.Total || 0), 0);
     let tamañoGrafp;
     let tamañoLetra;
     let tamañoBarra;
