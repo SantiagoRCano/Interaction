@@ -27,7 +27,7 @@ export const Page = () => {
                                     Telefono
                                 </th>
                                 <th scope="col" className="px-6 py-3 text-center">
-                                    Diciembre 2023 - Julio
+                                    Diciembre 2023 - Agosto
                                 </th>
                             </tr>
                         </thead>
