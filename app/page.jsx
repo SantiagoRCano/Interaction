@@ -42,6 +42,7 @@ export default function Home() {
           <BotonLleva destination={`./services`} buttonText="Noticias"/>
           <BotonLleva destination={`./services`} buttonText="Total"/>
           <BotonLleva destination={`./services`} buttonText="Editar Imagen"/>
+          <BotonLleva destination={`./services`} buttonText="Vuelos"/>
           <BotonLlevaTwo destination={`./recurrence`} buttonText="Recurrencia"/>
           <a href="https://appservices.vercel.app/">
             <button className='bg-green-500 md:h-[11-vh] md:w-[9vw] p-5 rounded-lg text-white text-center hover:bg-green-600'>Revision</button>
