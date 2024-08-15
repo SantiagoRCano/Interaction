@@ -2,7 +2,7 @@
 import React, { useEffect, useState} from 'react'
 import useHTTP from '@/hooks/useHttp'
 
-export const page = () => {
+export const Page = () => {
     let [rankData, setRankData ] = useState([])
 
     const { data, loading, error } = useHTTP('https://www.cpocketbot.com/api/rankingMonth')
@@ -89,4 +89,4 @@ export const page = () => {
   )
 }
 
-export default page;
+export default Page;
