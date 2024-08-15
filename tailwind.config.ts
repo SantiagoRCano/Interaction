@@ -19,6 +19,8 @@ const config: Config = {
         darkrai: '#1C2321',
         zander: '#21262c',
         bluesky:'#1f6fea',
+        timberwolf:'#D8CBC7',
+        sinopia: '#CC3F0C'
       }
     },
   },

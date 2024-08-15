@@ -1,6 +1,6 @@
 "use client"
 import React, {useEffect,useState} from "react";
-import { BotonLleva,BotonLlevaTwo } from '@/app/RedirectButton'
+import { BotonLleva,BotonLlevaThree,BotonLlevaTwo } from '@/app/RedirectButton'
 import rakingHttp from '@/hooks/rankingHttp'
 import useHTTP from "@/hooks/useHttp";
 
@@ -29,9 +29,9 @@ export default function Home() {
         {loading && <p>Cargando...</p>}
         {error && <p>Ocurrió un error al cargar la data.</p>}
         {data && (
-          <h2 className="text-black mb-6 p-3 bg-green-500 rounded-lg">Cantidad de personas que le han copiado al bot desde que se creo: {data.Total}</h2>
+          <buttton className="align-middle select-none font-sans mb-5 font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 bg-green-500 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none rounded-full">Cantidad de personas que le han copiado al bot desde que se creo: {data.Total}</buttton>
         )}
-        <div className="bg-zander flex flex-wrap justify-center items-center text-center gap-14 p-5 rounded-lg mb-32 h-full">
+        <div className="bg-white flex flex-wrap justify-center items-center text-center gap-14 p-5 rounded-lg mb-32 h-full">
           <BotonLleva destination={`./services`} buttonText="Mercado"/>
           <BotonLleva destination={`./services`} buttonText="Multas"/>
           <BotonLleva destination={`./services`} buttonText="Inmobiliaria"/>
@@ -44,11 +44,12 @@ export default function Home() {
           <BotonLleva destination={`./services`} buttonText="Editar Imagen"/>
           <BotonLleva destination={`./services`} buttonText="Vuelos"/>
           <BotonLlevaTwo destination={`./recurrence`} buttonText="Recurrencia"/>
+          <BotonLlevaThree destination={`./rank`} buttonText={"Servicios"}/>
           <a href="https://appservices.vercel.app/">
-            <button className='bg-green-500 md:h-[11-vh] md:w-[9vw] p-5 rounded-lg text-white text-center hover:bg-green-600'>Revision</button>
+            <button className='align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 bg-green-500 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none rounded-full'>Revision</button>
           </a>
           <a href="https://appservices.vercel.app/cualification">
-            <button className='bg-green-500 md:h-[11-vh] md:w-[9vw] p-5 rounded-lg text-white text-center hover:bg-green-600'>Calificacion</button>
+            <button className='align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 bg-green-500 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none rounded-full'>Calificacion</button>
           </a>
         </div>
 
