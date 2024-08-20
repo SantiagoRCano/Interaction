@@ -3,15 +3,19 @@ import React, { useEffect, useState} from 'react'
 import useHTTP from '@/hooks/useHttp'
 import serviceHttp from '@/hooks/servicesHttps'
 import rakingHttp from '@/hooks/rankingHttp'
+import otherHttp from '@/hooks/otherHttp'
 
 export const Page = () => {
     let [rankData, setRankData ] = useState([])
     let [noticiasData, setNoticiasData ] = useState([])
     let [respondeData, setRespondeData ] = useState([])
+    let [vuelosData, setVuelosData] = useState([])
     
     const { data, loading, error } = useHTTP('https://www.cpocketbot.com/api/rankingMonth')
     const { dataNews, loadingNews, errorNews} = serviceHttp(`https://www.cpocketbot.com/api/interaccion/Noticias`)
     const {rankingData, rakingLoading, rankingError } = rakingHttp(`https://www.cpocketbot.com/api/respondeMonth`)
+    const { oData, oDataLoading, oDataError} = otherHttp(`https://www.cpocketbot.com/api/interaccion/Vuelos`)
+
 
     useEffect(() => {
         if(data && !loading && !error){
@@ -24,6 +28,10 @@ export const Page = () => {
 
         if(rankingData && !rakingLoading && !rankingError){
             setRespondeData(rankingData)
+        }
+
+        if(oData && !oDataLoading && !oDataError){
+            setVuelosData(oData)
         }
     })
 
@@ -69,10 +77,12 @@ export const Page = () => {
         return rankData.map(item => {
             const newsItem = noticiasData.find(news => news.Mes === item.Mes);
             const respondeItem = respondeData.find(responde => responde.Mes === item.Mes)
+            const vuelosItem = vuelosData.find(vuelo => vuelo.Mes === item.Mes)
             return {
                 ...item,
                 TotalNoticias: newsItem ? (parseInt(item.TotalNoticias || 0) + newsItem.Total).toString() : item.TotalNoticias || '0',
                 TotalResponde: respondeItem ? (parseInt(item.TotalResponde || 0) + respondeItem.Total).toString() : item.TotalResponde || '0',
+                TotalVuelo: vuelosItem ? (parseInt(item.TotalVuelo || 0) + vuelosItem.Total).toString() : item.TotalVuelo || '0',
                 Mes: formatData[item.Mes]
             };
         });
@@ -97,6 +107,7 @@ export const Page = () => {
                         <th className="px-4 py-3 text-center">Editar Imagen</th>
                         <th className="px-4 py-3 text-center">Noticias</th>
                         <th className="px-4 py-3 text-center">Responde</th>
+                        <th className="px-4 py-3 text-center">Vuelos</th>
                         <th className="px-4 py-3 text-center">Mejor Servicio</th>
                     </tr>
                 </thead>
@@ -112,7 +123,8 @@ export const Page = () => {
                             { name: 'Resumen', total: parseInt(row.TotalResumen) },
                             { name: 'EImagen', total: parseInt(row.TotalEImagen) },
                             { name: 'Noticias', total: parseInt(row.TotalNoticias) },
-                            { name: 'Responde', total: parseInt(row.TotalResponde) }
+                            { name: 'Responde', total: parseInt(row.TotalResponde) },
+                            { name: 'Vuelo', total: parseInt(row.TotalVuelo) },
 
                         ];
 
@@ -131,6 +143,7 @@ export const Page = () => {
                                 <td className="border px-4 py-2">{row.TotalEImagen}</td>
                                 <td className="border px-4 py-2">{row.TotalNoticias}</td>
                                 <td className="border px-4 py-2">{row.TotalResponde}</td>
+                                <td className="border px-4 py-2">{row.TotalVuelo}</td>
                                 <td className="border px-4 py-2">{mejorServicio}</td>
                             </tr>
                         );
