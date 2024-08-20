@@ -1,15 +1,29 @@
 "use client"
 import React, { useEffect, useState} from 'react'
 import useHTTP from '@/hooks/useHttp'
+import serviceHttp from '@/hooks/servicesHttps'
+import rakingHttp from '@/hooks/rankingHttp'
 
 export const Page = () => {
     let [rankData, setRankData ] = useState([])
-
+    let [noticiasData, setNoticiasData ] = useState([])
+    let [respondeData, setRespondeData ] = useState([])
+    
     const { data, loading, error } = useHTTP('https://www.cpocketbot.com/api/rankingMonth')
+    const { dataNews, loadingNews, errorNews} = serviceHttp(`https://www.cpocketbot.com/api/interaccion/Noticias`)
+    const {rankingData, rakingLoading, rankingError } = rakingHttp(`https://www.cpocketbot.com/api/respondeMonth`)
 
     useEffect(() => {
         if(data && !loading && !error){
             setRankData(data)
+        }
+
+        if(dataNews && !loadingNews && !errorNews){
+            setNoticiasData(dataNews)
+        }
+
+        if(rankingData && !rakingLoading && !rankingError){
+            setRespondeData(rankingData)
         }
     })
 
@@ -33,22 +47,38 @@ export const Page = () => {
         '2024-September':'Septiembre'
     };
 
-    const processedData = rankData.map(monthData => {
-        const { Mes, ...services } = monthData;
-        const serviceNames = Object.keys(services);
-        const serviceValues = serviceNames.map(service => parseInt(services[service], 10));
+    // const processedData = rankData.map(monthData => {
+    //     const { Mes, ...services } = monthData;
+    //     const serviceNames = Object.keys(services);
+    //     const serviceValues = serviceNames.map(service => parseInt(services[service], 10));
     
-        const maxServiceValue = Math.max(...serviceValues);
+    //     const maxServiceValue = Math.max(...serviceValues);
     
-        const bestService = maxServiceValue === 0 ? "No Servicio" :
-            serviceNames[serviceValues.indexOf(maxServiceValue)].replace("Total", "");
+    //     const bestService = maxServiceValue === 0 ? "No Servicio" :
+    //         serviceNames[serviceValues.indexOf(maxServiceValue)].replace("Total", "");
     
-        return {
-            ...monthData,
-            Mes: formatData[Mes] || Mes,
-            MejorServicio: bestService
-        };
-    });
+    //     return {
+    //         ...monthData,
+    //         Mes: formatData[Mes] || Mes,
+    //         MejorServicio: bestService
+    //     };
+    // });
+
+
+    const mergeData = () => {
+        return rankData.map(item => {
+            const newsItem = noticiasData.find(news => news.Mes === item.Mes);
+            const respondeItem = respondeData.find(responde => responde.Mes === item.Mes)
+            return {
+                ...item,
+                TotalNoticias: newsItem ? (parseInt(item.TotalNoticias || 0) + newsItem.Total).toString() : item.TotalNoticias || '0',
+                TotalResponde: respondeItem ? (parseInt(item.TotalResponde || 0) + respondeItem.Total).toString() : item.TotalResponde || '0',
+                Mes: formatData[item.Mes]
+            };
+        });
+    };
+
+    const mergedTableData = mergeData();
 
 
   return (
@@ -65,23 +95,46 @@ export const Page = () => {
                         <th className="px-4 py-3 text-center">Recordatorios</th>
                         <th className="px-4 py-3 text-center">Resumen</th>
                         <th className="px-4 py-3 text-center">Editar Imagen</th>
+                        <th className="px-4 py-3 text-center">Noticias</th>
+                        <th className="px-4 py-3 text-center">Responde</th>
                         <th className="px-4 py-3 text-center">Mejor Servicio</th>
                     </tr>
                 </thead>
                 <tbody className='bg-white'>
-                    {processedData.map((row, index) => (
-                        <tr key={index} className='bg-green-500'>
-                            <td className="px-4 py-3 border text-center text-white">{row.Mes}</td>
-                            <td className="px-4 py-3 border text-center text-white">{row.TotalMultas}</td>
-                            <td className="px-4 py-3 border text-center text-white">{row.TotalInmobiliaria}</td>
-                            <td className="px-4 py-3 border text-center text-white">{row.TotalMercado}</td>
-                            <td className="px-4 py-3 border text-center text-white">{row.TotalImagen}</td>
-                            <td className="px-4 py-3 border text-center text-white">{row.TotalRecordatorios}</td>
-                            <td className="px-4 py-3 border text-center text-white">{row.TotalResumen}</td>
-                            <td className="px-4 py-3 border text-center text-white">{row.TotalEImagen}</td>
-                            <td className="px-4 py-3 border text-center text-white font-semibold">{row.MejorServicio}</td>
-                        </tr>
-                    ))}
+                    {mergedTableData.map((row, index) => {
+                        // Calcular el Mejor Servicio
+                        const servicios = [
+                            { name: 'Multas', total: parseInt(row.TotalMultas) },
+                            { name: 'Inmobiliaria', total: parseInt(row.TotalInmobiliaria) },
+                            { name: 'Mercado', total: parseInt(row.TotalMercado) },
+                            { name: 'Imagen', total: parseInt(row.TotalImagen) },
+                            { name: 'Recordatorios', total: parseInt(row.TotalRecordatorios) },
+                            { name: 'Resumen', total: parseInt(row.TotalResumen) },
+                            { name: 'EImagen', total: parseInt(row.TotalEImagen) },
+                            { name: 'Noticias', total: parseInt(row.TotalNoticias) },
+                            { name: 'Responde', total: parseInt(row.TotalResponde) }
+
+                        ];
+
+                        const mejorServicio = servicios.reduce((max, servicio) =>
+                            servicio.total > max.total ? servicio : max, { name: 'No Servicio', total: 0 }).name;
+
+                        return (
+                            <tr key={index}>
+                                <td className="border px-4 py-2">{row.Mes}</td>
+                                <td className="border px-4 py-2">{row.TotalMultas}</td>
+                                <td className="border px-4 py-2">{row.TotalInmobiliaria}</td>
+                                <td className="border px-4 py-2">{row.TotalMercado}</td>
+                                <td className="border px-4 py-2">{row.TotalImagen}</td>
+                                <td className="border px-4 py-2">{row.TotalRecordatorios}</td>
+                                <td className="border px-4 py-2">{row.TotalResumen}</td>
+                                <td className="border px-4 py-2">{row.TotalEImagen}</td>
+                                <td className="border px-4 py-2">{row.TotalNoticias}</td>
+                                <td className="border px-4 py-2">{row.TotalResponde}</td>
+                                <td className="border px-4 py-2">{mejorServicio}</td>
+                            </tr>
+                        );
+                    })}
                 </tbody>
             </table>
         </div>
