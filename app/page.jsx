@@ -43,6 +43,8 @@ export default function Home() {
           <BotonLleva destination={`./services`} buttonText="Total"/>
           <BotonLleva destination={`./services`} buttonText="Editar Imagen"/>
           <BotonLleva destination={`./services`} buttonText="Vuelos"/>
+          <BotonLleva destination={`./services`} buttonText="Electrodomesticos"/>
+          <BotonLleva destination={`./services`} buttonText="Empleos"/>
           <BotonLlevaTwo destination={`./recurrence`} buttonText="Recurrencia"/>
           <BotonLlevaThree destination={`./rank`} buttonText={"Servicios"}/>
           <a href="https://appservices.vercel.app/">
