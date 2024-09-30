@@ -13,8 +13,8 @@ export const Page = () => {
 
 
 
-    const { data, loading, error} = useHTTP(`https://www.cpocketbot.com/api/interaccion/${params.service}`)
-    const { dataNews, loadingNews, errorNews} = serviceHttp(`https://www.cpocketbot.com/api/interaccionWeek/${params.service}`)
+    const { data, loading, error} = useHTTP(`http://pocki-api-env-1.eba-pprtwpab.us-east-1.elasticbeanstalk.com/api/interaccion/${params.service}`)
+    const { dataNews, loadingNews, errorNews} = serviceHttp(`http://pocki-api-env-1.eba-pprtwpab.us-east-1.elasticbeanstalk.com/api/interaccionWeek/${params.service}`)
     
 
 

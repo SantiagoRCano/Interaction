@@ -9,8 +9,8 @@ import useHTTP from "@/hooks/useHttp";
 export default function Home() {
   let [rakingData, setRakingData] = useState([])
 
-  const {rankingData, rakingLoading, rankingError } = rakingHttp(`https://www.cpocketbot.com/api/rankingInteraction`)
-  const { data, loading, error } = useHTTP(`https://www.cpocketbot.com/api/usersPocki`)
+  const {rankingData, rakingLoading, rankingError } = rakingHttp(`http://pocki-api-env-1.eba-pprtwpab.us-east-1.elasticbeanstalk.com/api/rankingInteraction`)
+  const { data, loading, error } = useHTTP(`http://pocki-api-env-1.eba-pprtwpab.us-east-1.elasticbeanstalk.com/api/usersPocki`)
 
 
   useEffect(() => {

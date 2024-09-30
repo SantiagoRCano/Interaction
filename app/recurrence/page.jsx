@@ -7,7 +7,7 @@ export const Page = () => {
 
     let [recurrenceData, setRecurrenceData] = useState([])
 
-    const { data, loading, error } = useHTTP(`https://www.cpocketbot.com/api/recurrence`)
+    const { data, loading, error } = useHTTP(`http://pocki-api-env-1.eba-pprtwpab.us-east-1.elasticbeanstalk.com/api/recurrence`)
 
 
     useEffect(() => {
