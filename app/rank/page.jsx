@@ -11,10 +11,10 @@ export const Page = () => {
     let [respondeData, setRespondeData ] = useState([])
     let [vuelosData, setVuelosData] = useState([])
     
-    const { data, loading, error } = useHTTP('https://www.cpocketbot.com/api/rankingMonth')
-    const { dataNews, loadingNews, errorNews} = serviceHttp(`https://www.cpocketbot.com/api/interaccion/Noticias`)
-    const {rankingData, rakingLoading, rankingError } = rakingHttp(`https://www.cpocketbot.com/api/respondeMonth`)
-    const { oData, oDataLoading, oDataError} = otherHttp(`https://www.cpocketbot.com/api/interaccion/Vuelos`)
+    const { data, loading, error } = useHTTP('http://pocki-api-env-1.eba-pprtwpab.us-east-1.elasticbeanstalk.com/api/rankingMonth')
+    const { dataNews, loadingNews, errorNews} = serviceHttp(`http://pocki-api-env-1.eba-pprtwpab.us-east-1.elasticbeanstalk.com/api/interaccion/Noticias`)
+    const {rankingData, rakingLoading, rankingError } = rakingHttp(`http://pocki-api-env-1.eba-pprtwpab.us-east-1.elasticbeanstalk.com/api/respondeMonth`)
+    const { oData, oDataLoading, oDataError} = otherHttp(`http://pocki-api-env-1.eba-pprtwpab.us-east-1.elasticbeanstalk.com/api/interaccion/Vuelos`)
 
 
     useEffect(() => {
